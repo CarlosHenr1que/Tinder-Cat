@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {render} from '@testing-library/react-native';
+import {fireEvent, render} from '@testing-library/react-native';
 import RoundButton from '../../src/components/RoundButton';
 
 import {ThemeProvider} from 'styled-components/native';
@@ -35,5 +35,15 @@ describe('RoundButton', () => {
       'source',
       image,
     );
+  });
+
+  it('should call onPress when button is pressed', () => {
+    const {sut, onPressMock} = makeSut();
+    const {getByTestId} = render(sut);
+
+    const component = getByTestId('round_button');
+    fireEvent.press(component);
+
+    expect(onPressMock).toHaveBeenCalledTimes(1);
   });
 });
