@@ -1,5 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
+
+import {useContext} from 'react';
+import {ThemeContext} from 'styled-components';
+
+import {StatusBar} from 'react-native';
 import {SwiperDeck} from '../../components';
 
 import {usePagination} from '../../hooks/usePagination';
@@ -14,6 +19,7 @@ const MINIMUM_SIZE = 1;
 const userID = 'CarlosHen1que';
 
 const Cats: React.FC = () => {
+  const theme = useContext(ThemeContext);
   const [breeds, setBreeds] = useState<Breed[]>([]);
   const {page, nextPage, getLastStoredPagination, saveLastItemID} =
     usePagination({
@@ -82,6 +88,10 @@ const Cats: React.FC = () => {
 
   return (
     <Container>
+      <StatusBar
+        backgroundColor={theme.colors.background}
+        barStyle="dark-content"
+      />
       <SwiperDeck
         data={breeds}
         onSwiped={handleCardSwipe}
