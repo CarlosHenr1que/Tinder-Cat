@@ -1,4 +1,4 @@
-import {server} from './__tests__/server/server';
+import {server} from './server/server';
 
 beforeAll(() => server.listen());
 

@@ -1,14 +1,13 @@
-import {Breed} from '../../models';
 import api from '../api';
-import {RequestSendVoteParams, ResponseGetBreedList} from './protocols';
+import {RequestSendVoteParams, ResponseSendVote} from './protocols';
 
 export const requestSendVote = async ({
   image_id,
   sub_id,
   value,
-}: RequestSendVoteParams): Promise<Breed[] | undefined> => {
+}: RequestSendVoteParams): Promise<any | undefined> => {
   try {
-    const response: ResponseGetBreedList = await api.post('votes', {
+    const response: ResponseSendVote = await api.post('votes', {
       image_id,
       sub_id,
       value,
