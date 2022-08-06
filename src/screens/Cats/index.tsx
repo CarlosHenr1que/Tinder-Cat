@@ -6,10 +6,12 @@ import {usePagination} from '../../hooks/usePagination';
 
 import {Breed} from '../../models';
 import {requestGetBreedList} from '../../services/breed';
+import {requestSendVote} from '../../services/vote';
 import {Container} from './styles';
 
 const LIMIT = 10;
 const MINIMUM_SIZE = 1;
+const userID = 'CarlosHen1que';
 
 const Cats: React.FC = () => {
   const [breeds, setBreeds] = useState<Breed[]>([]);
@@ -18,6 +20,22 @@ const Cats: React.FC = () => {
       pageKey: 'tinderCat@breedsLastPage',
       lastItemKey: 'tinderCat@breedsLastBreedId',
     });
+
+  const handleLeftSwipe = (item: Breed) => {
+    requestSendVote({
+      image_id: item.image.id,
+      sub_id: userID,
+      value: 0,
+    });
+  };
+
+  const handleRightSwipe = (item: Breed) => {
+    requestSendVote({
+      image_id: item.image.id,
+      sub_id: userID,
+      value: 1,
+    });
+  };
 
   const handleCardSwipe = (currentSize: number, swipedID: string) => {
     saveLastItemID(swipedID);
@@ -67,8 +85,8 @@ const Cats: React.FC = () => {
       <SwiperDeck
         data={breeds}
         onSwiped={handleCardSwipe}
-        onLeftSwipe={() => {}}
-        onRightSwipe={() => {}}
+        onLeftSwipe={handleLeftSwipe}
+        onRightSwipe={handleRightSwipe}
       />
     </Container>
   );
