@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {fireEvent, render} from '@testing-library/react-native';
-import RoundButton from '../../src/components/RoundButton';
+import {RoundButton} from '../../src/components';
 
 import {ThemeProvider} from 'styled-components/native';
 import theme from '../../src/styles/themes/default';
