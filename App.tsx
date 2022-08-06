@@ -3,12 +3,12 @@ import React from 'react';
 import {ThemeProvider} from 'styled-components';
 import theme from './src/styles/themes/default';
 
-import Cats from './src/screens/Cats';
+import Routes from './src/routes';
 
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Cats />
+      <Routes />
     </ThemeProvider>
   );
 };
