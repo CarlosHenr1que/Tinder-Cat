@@ -147,7 +147,7 @@ const SwiperDeck: React.FC<Props> = ({
                 title={card.name}
                 imageUri={getImage(card)}
                 description={card.origin}
-                position={card.id}
+                position={card.affection_level.toString()}
               />
             </Card>
           );

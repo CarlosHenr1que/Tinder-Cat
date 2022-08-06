@@ -8,4 +8,5 @@ export interface Breed {
   name: string;
   origin: string;
   image: Image;
+  affection_level: number;
 }
