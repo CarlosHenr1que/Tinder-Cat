@@ -1,5 +1,5 @@
 import {requestGetBreedList} from '../../src/services/breed';
-import {breeds} from '../../mocks/breeds';
+import {breeds} from '../../test/mocks/breeds';
 
 describe('Breed Service', () => {
   it('should get breed list', async () => {
