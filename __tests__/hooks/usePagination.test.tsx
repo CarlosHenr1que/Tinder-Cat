@@ -35,4 +35,25 @@ describe('Hook: usePagination', () => {
 
     expect(sut.current.page).toBe(1);
   });
+
+  it('should restore values when getLastStoredPagination is called', async () => {
+    getStoredValue.mockReturnValueOnce('any_id');
+    getStoredValue.mockReturnValueOnce('5');
+
+    const {result: sut} = renderHook(() =>
+      usePagination({pageKey: 'page_key', lastItemKey: 'last_item_key'}),
+    );
+
+    var lastStoredPagination: {
+      lastItemID: string | null;
+      lastPage: string | null;
+    } = {lastItemID: null, lastPage: null};
+
+    await act(async () => {
+      lastStoredPagination = await sut.current.getLastStoredPagination();
+    });
+
+    expect(lastStoredPagination.lastItemID).toBe('any_id');
+    expect(lastStoredPagination.lastPage).toBe('5');
+  });
 });
