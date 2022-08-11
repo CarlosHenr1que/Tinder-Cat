@@ -56,4 +56,16 @@ describe('Hook: usePagination', () => {
     expect(lastStoredPagination.lastItemID).toBe('any_id');
     expect(lastStoredPagination.lastPage).toBe('5');
   });
+
+  it('should save last id when saveLastItemID is called', async () => {
+    const {result: sut} = renderHook(() =>
+      usePagination({pageKey: 'page_key', lastItemKey: 'last_item_key'}),
+    );
+
+    await act(async () => {
+      await sut.current.saveLastItemID('breed_id');
+    });
+
+    expect(setStoredValue).toHaveBeenCalledWith('last_item_key', 'breed_id');
+  });
 });
