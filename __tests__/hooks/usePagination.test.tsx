@@ -1,4 +1,4 @@
-import {renderHook} from '@testing-library/react-native';
+import {act, renderHook} from '@testing-library/react-native';
 
 import {usePagination} from '../../src/hooks/usePagination';
 import {useStorage} from '../../src/hooks/useStorage';
@@ -24,5 +24,15 @@ describe('Hook: usePagination', () => {
     );
 
     expect(sut.current.page).toBe(0);
+  });
+
+  it('should update page when nextPage is called', async () => {
+    const {result: sut} = renderHook(() =>
+      usePagination({pageKey: 'page_key', lastItemKey: 'last_item_key'}),
+    );
+
+    act(() => sut.current.nextPage());
+
+    expect(sut.current.page).toBe(1);
   });
 });
