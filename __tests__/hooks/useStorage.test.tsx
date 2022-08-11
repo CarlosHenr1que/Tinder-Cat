@@ -15,4 +15,15 @@ describe('Hook: useStorage', () => {
 
     expect(StorageMock.setItem).toHaveBeenCalledWith(id, value);
   });
+
+  it('should get a stored value with async storage', async () => {
+    const {result} = renderHook(() => useStorage());
+    const id = 'any_id';
+    const value = 'any_value';
+
+    StorageMock.getItem.mockImplementationOnce(() => Promise.resolve(value));
+    const recoveredValue = await result.current.getStoredValue(id);
+
+    expect(recoveredValue).toBe(value);
+  });
 });
